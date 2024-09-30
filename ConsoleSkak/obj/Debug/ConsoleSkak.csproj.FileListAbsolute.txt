@@ -1,0 +1,7 @@
+D:\Github Repos\Dass1\ConsoleSkak\bin\Debug\ConsoleSkak.exe.config
+D:\Github Repos\Dass1\ConsoleSkak\bin\Debug\ConsoleSkak.exe
+D:\Github Repos\Dass1\ConsoleSkak\bin\Debug\ConsoleSkak.pdb
+D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.csproj.AssemblyReference.cache
+D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.csproj.CoreCompileInputs.cache
+D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.exe
+D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.pdb
