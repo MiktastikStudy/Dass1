@@ -1,8 +1,9 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿
+
+// Quit funktion
+// Try again/reset funktion - o
+// Farve på "brikkerne"
+// Return to main menu funktion
 
 //namespace ConsoleSkak
 //{
