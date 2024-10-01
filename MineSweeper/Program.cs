@@ -7,77 +7,75 @@ using System.Threading.Tasks;
 
 namespace MineSweeper
 {
-
     /*
-     * Create MineSweeper game
-     * Elements that needs to be impleneted:
-     * Oprettelse af et board
-     * Random placering af Mines - Method
-     * Man skal kunne sætte Flags - Method
-     * Tal der indikere miner omkring dem
+     * Create a MineSweeper game
+     * Elements that need to be implemented:
+     * - Creation of a board
+     * - Random placement of mines - Method
+     * - Ability to set flags - Method
+     * - Numbers to indicate surrounding mines
      * 
-     * Plan - 
-     * Lav array for board, og lav metode til board og call den i main - Boardet skal være fyldt af # som indikere ikke vendte felter
-     * Lav derefter at spilleren kan flytte sig rundt via pil-taster og vende felterne, efter et felt er blevet vendt skal den være tom til at starte med
-     * Quit funktion - Ny metode hvor man skal kunne trykke på q eller Esc for at quite spillet
-     * Man skal kunne sætte flag der hvor man tror bomberne er ved at trykke på f
-     * Bomber skal placeres random på boardet
-     * Der skal printes tal ud til spilleren som angiver bomber omkring felterne
-     * 
-     * Arbejde videre med udseende af board
-     * Test for fejl angående F på ikke bombe, at F skal kunne fjernes igen - Muligvis noget med Floodfill calculation
+     * Plan: 
+     * - Create an array for the board, and a method to initialize it, call the method in `Main`.
+     * - Allow the player to navigate the board using arrow keys and reveal cells.
+     * - Create a quit function using 'q' or 'Esc'.
+     * - Allow the player to flag suspected mines with 'f'.
+     * - Randomly place mines on the board.
+     * - Show numbers that indicate how many mines are adjacent to each cell.
+     * - Test for bugs regarding flagging, removal of flags, and flood-fill for adjacent cells.
      */
     internal class Program
     {
-        //Define variables for board size and 2D array for board
+        // Define board size and related arrays for storing the board state
         static int height = 8;
         static int width = 8;
-        static char[,] board = new char [height, width];
-        static bool[,] isRevealed = new bool[height, width];
-        static int numMines = 10;
-        static bool[,] isMine = new bool[height, width];
-        static int[,] adjacentMines = new int[height, width];
-        static bool[,] isFlagged = new bool[height, width];
-        static bool gameOver = false;
+        static char[,] board = new char[height, width];      // Store the current view of the board
+        static bool[,] isRevealed = new bool[height, width]; // Track revealed cells
+        static int numMines = 10;                            // Number of mines
+        static bool[,] isMine = new bool[height, width];     // Track mine positions
+        static int[,] adjacentMines = new int[height, width];// Store number of mines around each cell
+        static bool[,] isFlagged = new bool[height, width];  // Track flagged cells
+        static bool gameOver = false;                        // Game over flag
 
-        //Main - execute game
+        // Main method, initiates the game
         static void Main(string[] args)
         {
-
-            //Initalize the game
+            // Initialize board and place mines
             InitializeBoard();
             PlaceMines();
             CalculateMinesAround();
 
-            //While gameOver is false, then you can play the game
-            while (gameOver == false)
+            // Game loop - continues until gameOver becomes true
+            while (!gameOver)
             {
                 Console.Clear();
-                DisplayBoard();
-                PlayerInput();
+                DisplayBoard();  // Display the current board state
+                PlayerInput();   // Handle player's input for revealing or flagging cells
             }
 
-            //If gameOver is true then clear board and it prints out "game over" to the plyaer
+            // If the game is over, display the board one last time and end the game
             Console.Clear();
             DisplayBoard();
             Console.WriteLine("Game over!");
-            Console.ReadKey();
+            Console.ReadKey(); // Wait for player input before closing
         }
 
+        // Method to initialize the board with unrevealed cells, and no mines or flags
         static void InitializeBoard()
         {
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
-                    board[i, j] = '#';
-                    isRevealed[i,j] = false;
-                    isFlagged[i, j] = false;
-                    isMine[i, j] = false;
+                    board[i, j] = '#';              // '#' represents an unrevealed cell
+                    isRevealed[i, j] = false;       // No cells are revealed initially
+                    isFlagged[i, j] = false;        // No cells are flagged initially
+                    isMine[i, j] = false;           // No mines are placed yet
                 }
             }
         }
 
+        // Method to display the board to the player
         static void DisplayBoard()
         {
             for (int i = 0; i < height; i++)
@@ -86,43 +84,47 @@ namespace MineSweeper
                 {
                     if (isFlagged[i, j])
                     {
-                        Console.Write('F');  // Show flag if flagged
+                        Console.Write('F');  // Show 'F' for flagged cells
                     }
                     else if (!isRevealed[i, j])
                     {
-                        Console.Write('#');   // Show unrevealed cell
+                        Console.Write('#');   // Show '#' for unrevealed cells
                     }
                     else if (isMine[i, j])
                     {
-                        Console.Write('*');   // Show mine
+                        Console.Write('*');   // Show '*' for mines
                     }
                     else
                     {
-                        Console.Write(adjacentMines[i, j]); // Show number of adjacent mines
+                        Console.Write(adjacentMines[i, j]); // Show the number of adjacent mines
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine();  // Move to the next line after each row
             }
         }
 
+        // Method to randomly place mines on the board
         static void PlaceMines()
         {
-            Random rand = new Random();
-            int minesPlaced = 0;
+            Random rand = new Random();   // Random generator for mine placement
+            int minesPlaced = 0;          // Counter to keep track of how many mines are placed
 
             while (minesPlaced < numMines)
             {
+                // Generate random coordinates for mine placement
                 int randRow = rand.Next(0, height);
                 int randCol = rand.Next(0, width);
 
+                // Place a mine if there isn't one already at the generated location
                 if (!isMine[randRow, randCol])
                 {
                     isMine[randRow, randCol] = true;
-                    minesPlaced++;
+                    minesPlaced++;  // Increment the counter for placed mines
                 }
             }
         }
 
+        // Method to calculate the number of mines surrounding each cell
         static void CalculateMinesAround()
         {
             for (int row = 0; row < height; row++)
@@ -131,43 +133,44 @@ namespace MineSweeper
                 {
                     if (!isMine[row, col])
                     {
-                        adjacentMines[row, col] = CountAdjacentMines(row, col);
+                        adjacentMines[row, col] = CountAdjacentMines(row, col); // Calculate adjacent mines for non-mine cells
                     }
                 }
             }
         }
 
-        // Count mines around a given cell
+        // Helper method to count mines around a specific cell
         static int CountAdjacentMines(int row, int col)
         {
-            int  minesAround= 0;
+            int minesAround = 0;
+            // Check all adjacent cells (including diagonals)
             for (int i = row - 1; i <= row + 1; i++)
             {
                 for (int j = col - 1; j <= col + 1; j++)
                 {
-                    if (i >= 0 && i < height && j >= 0 && j < width && isMine[i, j]) //Checks if the cell is a mine
+                    // Ensure the cell is within the board bounds and is a mine
+                    if (i >= 0 && i < height && j >= 0 && j < width && isMine[i, j])
                     {
-                        minesAround++; //Increase int minesAround
+                        minesAround++;  // Increment count if adjacent cell is a mine
                     }
                 }
             }
-            return minesAround; //Return the value of minesAround
+            return minesAround;  // Return the total count of surrounding mines
         }
 
+        // Method to toggle flagging of a cell
         static void Flag(int row, int col)
         {
-            //If out of bounds or the cell is revealed then it returns
+            // If the cell is out of bounds or already revealed, ignore the flagging attempt
             if (row < 0 || row >= height || col < 0 || col >= width || isRevealed[row, col])
             {
                 return;
             }
-            //else isFlagged becomes true if it was false or it becomes false if it was true
-            else
-            {
-                isFlagged[row, col] = !isFlagged[row, col];
-            }
+            // Toggle the flag state for the cell
+            isFlagged[row, col] = !isFlagged[row, col];
         }
 
+        // Method to handle player input for revealing or flagging cells
         static void PlayerInput()
         {
             while (true)
@@ -176,62 +179,69 @@ namespace MineSweeper
                 int rowInput;
                 int colInput;
 
+                // Prompt for player input (reveal or flag)
                 Console.WriteLine("Enter 'r' or 'f' to reveal or flag a cell");
-                input = char.Parse(Console.ReadLine().ToLower());
+                input = char.Parse(Console.ReadLine().ToLower());  // Convert input to lowercase for easier handling
                 if (input == 'r')
                 {
+                    // Reveal a cell
                     Console.WriteLine("Enter row");
-                    rowInput = int.Parse(Console.ReadLine());
+                    rowInput = int.Parse(Console.ReadLine());   // Get row input from player
                     Console.WriteLine("Enter col");
-                    colInput = int.Parse(Console.ReadLine());
-                    RevealCell(rowInput, colInput);
+                    colInput = int.Parse(Console.ReadLine());   // Get column input from player
+                    RevealCell(rowInput, colInput);             // Call method to reveal the cell
                     break;
-                } else if(input == 'f')
+                }
+                else if (input == 'f')
                 {
+                    // Flag a cell
                     Console.WriteLine("Enter row");
-                    rowInput = int.Parse(Console.ReadLine());
+                    rowInput = int.Parse(Console.ReadLine());   // Get row input from player
                     Console.WriteLine("Enter col");
-                    colInput = int.Parse(Console.ReadLine());
-                    Flag(rowInput, colInput);
+                    colInput = int.Parse(Console.ReadLine());   // Get column input from player
+                    Flag(rowInput, colInput);                   // Call method to flag the cell
                     break;
                 }
             }
         }
 
+        // Method to reveal a cell on the board
         static void RevealCell(int row, int col)
         {
-            //If out of bounds or the cell is revealed then it returns
+            // Ignore if the cell is out of bounds or already revealed
             if (row < 0 || row >= height || col < 0 || col >= width || isRevealed[row, col])
             {
                 return;
             }
-            else
-            {
-                isRevealed[row, col] = true;
-            }
+            // Mark the cell as revealed
+            isRevealed[row, col] = true;
 
+            // If the revealed cell is a mine, the game is over
             if (isMine[row, col])
             {
                 gameOver = true;
                 return;
             }
 
-            if (adjacentMines[row,col] == 0)
+            // If there are no adjacent mines, recursively reveal surrounding cells
+            if (adjacentMines[row, col] == 0)
             {
-                RevealAdjacentCells(row, col);
+                RevealAdjacentCells(row, col);  // Reveal adjacent cells using flood-fill technique
             }
-
         }
 
+        // Method to recursively reveal adjacent cells when there are no surrounding mines
         static void RevealAdjacentCells(int row, int col)
         {
+            // Loop through adjacent cells (including diagonals)
             for (int i = row - 1; i <= row + 1; i++)
             {
                 for (int j = col - 1; j <= col + 1; j++)
                 {
+                    // Ensure the cell is within bounds and not yet revealed
                     if (i >= 0 && i < height && j >= 0 && j < width && !isRevealed[i, j])
                     {
-                        RevealCell(i, j);
+                        RevealCell(i, j);  // Recursively reveal the adjacent cell
                     }
                 }
             }
