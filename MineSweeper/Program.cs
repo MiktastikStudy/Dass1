@@ -14,7 +14,6 @@ namespace MineSweeper
      */
     internal class Program
     {
-        // Define board size and related arrays for storing the board state
         static int height = 8;
         static int width = 8;
         static char[,] board = new char[height, width];      // Store the current view of the board
@@ -23,10 +22,9 @@ namespace MineSweeper
         static bool[,] isMine = new bool[height, width];     // Track mine positions
         static int[,] adjacentMines = new int[height, width];// Store number of mines around each cell
         static bool[,] isFlagged = new bool[height, width];  // Track flagged cells
-        static bool gameOver = false;                        // Game over flag
-        static int flagsLeft;                                // Tracks how many flags are left   
+        static bool gameOver = false;                        // Game over
+        static int flagsLeft;                                // Tracks how many flags are left
 
-        // Main method, initiates the game
         static void Main(string[] args)
         {
             while (true)
@@ -41,12 +39,20 @@ namespace MineSweeper
                     DisplayBoard();  // Display the current board state
                     PlayerInput();   // Handle player's input for revealing or flagging cells
                 }
-
                 // If the game is over, display the board one last time and end the game
                 Console.Clear();
                 DisplayBoard();
-                Console.WriteLine("Game over!"); 
-                
+
+                // Display message based on the game outcome
+                if (CheckWinCondition())
+                {
+                    Console.WriteLine("You won!");  // Win message
+                }
+                else
+                {
+                    Console.WriteLine("Game over!"); // Game over (loss)
+                }
+
                 // Prompt to try again or quit
                 if (!TryAgain())
                 {
@@ -84,7 +90,7 @@ namespace MineSweeper
         static void DisplayBoard()
         {
             Console.WriteLine($"Flags left: {flagsLeft}");
-            
+
             Console.WriteLine("\n  01234567");
             for (int i = 0; i < height; i++)
             {
@@ -211,22 +217,31 @@ namespace MineSweeper
 
                 // Prompt for player input (reveal or flag)
                 Console.WriteLine("Enter 'r' to reveal, or 'f' to flag");
-                //input = char.Parse(Console.ReadLine().ToLower());  // Convert input to lowercase for easier handling
                 input = Console.ReadLine().ToLower();
-                if(char.TryParse(input, out output))
+
+                if (char.TryParse(input, out output))
                 {
                     if (output == 'r')
                     {
                         // Reveal a cell
                         Console.WriteLine("Enter row");
                         rowInput = Console.ReadLine();   // Get row input from player
-                        if (int.TryParse(rowInput, out rowOutput) && rowOutput >= 0 && rowOutput <= height)
+                        if (int.TryParse(rowInput, out rowOutput) && rowOutput >= 0 && rowOutput < height)
                         {
                             Console.WriteLine("Enter col");
                             colInput = Console.ReadLine();
-                            if (int.TryParse(colInput, out colOutput) && colOutput >= 0 && colOutput <= width)
+                            if (int.TryParse(colInput, out colOutput) && colOutput >= 0 && colOutput < width)
                             {
                                 RevealCell(rowOutput, colOutput);
+
+                                // Check if the player has won after revealing a cell
+                                if (CheckWinCondition())
+                                {
+                                    gameOver = true;
+                                    Console.Clear();
+                                    DisplayBoard();
+                                    Console.WriteLine("You won!"); // Display the win message
+                                }
                                 break;
                             }
                         }
@@ -236,13 +251,22 @@ namespace MineSweeper
                         // Flag a cell
                         Console.WriteLine("Enter row");
                         rowInput = Console.ReadLine();   // Get row input from player
-                        if (int.TryParse(rowInput, out rowOutput) && rowOutput >= 0 && rowOutput <= height)
+                        if (int.TryParse(rowInput, out rowOutput) && rowOutput >= 0 && rowOutput < height)
                         {
                             Console.WriteLine("Enter col");
                             colInput = Console.ReadLine();
-                            if (int.TryParse(colInput, out colOutput) && colOutput >= 0 && colOutput <= width)
+                            if (int.TryParse(colInput, out colOutput) && colOutput >= 0 && colOutput < width)
                             {
                                 Flag(rowOutput, colOutput);
+
+                                // Check if the player has won after flagging a cell
+                                if (CheckWinCondition())
+                                {
+                                    gameOver = true;
+                                    Console.Clear();
+                                    DisplayBoard();
+                                    Console.WriteLine("You won!"); // Display the win message
+                                }
                                 break;
                             }
                         }
@@ -263,66 +287,65 @@ namespace MineSweeper
         static void RevealCell(int row, int col)
         {
             // Ignore if the cell is out of bounds or already revealed
-            if (row < 0 || row >= height || col < 0 || col >= width || isFlagged[row, col] || isRevealed[row, col])
+            if (row < 0 || row >= height || col < 0 || col >= width || isRevealed[row, col] || isFlagged[row, col])
             {
                 return;
             }
-            // Mark the cell as revealed
-            isRevealed[row, col] = true;
 
-            // If the revealed cell is a mine, the game is over
+            isRevealed[row, col] = true;  // Reveal the cell
+
+            // If the revealed cell is a mine, game over
             if (isMine[row, col])
             {
                 gameOver = true;
-                return;
             }
-
-            // If there are no adjacent mines, recursively reveal surrounding cells
-            if (adjacentMines[row, col] == 0)
+            // If the revealed cell has no adjacent mines, reveal adjacent cells recursively
+            else if (adjacentMines[row, col] == 0)
             {
-                RevealAdjacentCells(row, col);  // Reveal adjacent cells using flood-fill technique
-            }
-
-        }
-
-        // Method to recursively reveal adjacent cells when there are no surrounding mines
-        static void RevealAdjacentCells(int row, int col)
-        {
-            // Loop through adjacent cells (including diagonals)
-            for (int i = row - 1; i <= row + 1; i++)
-            {
-                for (int j = col - 1; j <= col + 1; j++)
+                for (int i = row - 1; i <= row + 1; i++)
                 {
-                    // Ensure the cell is within bounds and not yet revealed
-                    if (i >= 0 && i < height && j >= 0 && j < width && !isFlagged[i, j] && !isRevealed[i, j])
+                    for (int j = col - 1; j <= col + 1; j++)
                     {
-                        RevealCell(i, j);  // Recursively reveal the adjacent cell
+                        if (i >= 0 && i < height && j >= 0 && j < width)
+                        {
+                            RevealCell(i, j);  // Recursively reveal adjacent cells
+                        }
                     }
                 }
             }
         }
-        static bool TryAgain()
+
+        // Method to check if the player has won the game
+        static bool CheckWinCondition()
         {
-            while (true)
+            for (int i = 0; i < height; i++)
             {
-                Console.WriteLine("Do you want to try again? (y/n)");
-                char tInput = char.Parse(Console.ReadLine().ToLower());
-                
-                if (tInput == 'y')
+                for (int j = 0; j < width; j++)
                 {
-                    return true; // Start a new game
-                }
-                else if (tInput == 'n')
-                {
-                    return false; // Quit the game
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input, try again");
+                    // If there is a non-mine cell that is not revealed, the player hasn't won yet
+                    if (!isMine[i, j] && !isRevealed[i, j])
+                    {
+                        return false; // Continue the game
+                    }
+
+                    // If there is a mine cell that is not flagged, the player hasn't won yet
+                    if (isMine[i, j] && !isFlagged[i, j])
+                    {
+                        return false; // Continue the game
+                    }
                 }
             }
+            return true; // All non-mine cells are revealed, player wins
         }
 
-
+        // Method to ask the player if they want to play again
+        static bool TryAgain()
+        {
+            Console.WriteLine("Play again? (y/n)");
+            string input = Console.ReadLine().ToLower();
+            return input == "y";
+        }
     }
 }
+
+

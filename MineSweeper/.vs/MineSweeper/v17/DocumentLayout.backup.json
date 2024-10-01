@@ -5,6 +5,9 @@
     {
       "AbsoluteMoniker": "D:0:0:{E512A40F-7559-4B7F-B4BF-B18E8F277879}|MineSweeper.csproj|c:\\users\\david\\onedrive\\desktop\\school\\hagi\\dass1\\minesweeper\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E512A40F-7559-4B7F-B4BF-B18E8F277879}|MineSweeper.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B37C8105-65AE-4952-A276-239CDE42510A}|..\\MineSweeper - Test 2\\MineSweeper - Test 2.csproj|c:\\users\\david\\onedrive\\desktop\\school\\hagi\\dass1\\minesweeper - test 2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +17,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\david\\OneDrive\\Desktop\\School\\HAGI\\Dass1\\MineSweeper - Test 2\\Program.cs",
+              "RelativeDocumentMoniker": "..\\MineSweeper - Test 2\\Program.cs",
+              "ToolTip": "C:\\Users\\david\\OneDrive\\Desktop\\School\\HAGI\\Dass1\\MineSweeper - Test 2\\Program.cs",
+              "RelativeToolTip": "..\\MineSweeper - Test 2\\Program.cs",
+              "ViewState": "AgIAAEIBAAAAAAAAAAAAAFkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T12:16:01.445Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +40,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\david\\OneDrive\\Desktop\\School\\HAGI\\Dass1\\MineSweeper\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACYBAAAAAAAAAAAqwD4BAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-27T08:48:03.623Z",
               "EditorCaption": ""
