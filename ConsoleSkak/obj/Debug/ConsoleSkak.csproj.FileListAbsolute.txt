@@ -5,3 +5,10 @@ D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.csproj.AssemblyReference
 D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.csproj.CoreCompileInputs.cache
 D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.exe
 D:\Github Repos\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.pdb
+D:\Git\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.csproj.AssemblyReference.cache
+D:\Git\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.csproj.CoreCompileInputs.cache
+D:\Git\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.exe
+D:\Git\Dass1\ConsoleSkak\obj\Debug\ConsoleSkak.pdb
+D:\Git\Dass1\ConsoleSkak\bin\Debug\ConsoleSkak.exe.config
+D:\Git\Dass1\ConsoleSkak\bin\Debug\ConsoleSkak.exe
+D:\Git\Dass1\ConsoleSkak\bin\Debug\ConsoleSkak.pdb
