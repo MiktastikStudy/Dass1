@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MineSweeper - Game", "..\MineSweeper - Game\MineSweeper - Game.csproj", "{02A88DA6-1459-438F-BED7-D9DCCC477B20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "..\MineSweeper - Game\Main.csproj", "{02A88DA6-1459-438F-BED7-D9DCCC477B20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

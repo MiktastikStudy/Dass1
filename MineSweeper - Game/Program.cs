@@ -8,8 +8,9 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
-namespace MineSweeper
+namespace Main_
 {
     internal class Program
     {
@@ -48,7 +49,7 @@ namespace MineSweeper
                         PlayChess();
                         break;
                     case "3":
-                        //PlayBattleShips();
+                        PlayBattleShips();
                         break;
                     case "4":
                         PlayJeoperdy();
@@ -62,6 +63,7 @@ namespace MineSweeper
             }
         }
 
+        //Start Minesweeper
         static void PlayMineSweeper()
         {
             while (true)
@@ -384,6 +386,7 @@ namespace MineSweeper
             return input == "y";
         }
 
+        //Start on Chess
         static void PlayChess()
         {
             // Opret et 8x8 skakbræt med tegn, hvor '.' repræsenterer et tomt felt
@@ -558,6 +561,7 @@ namespace MineSweeper
             Console.WriteLine("  a b c d e f g h");
         }
 
+        //Start on Jeoperdy
         static void PlayJeoperdy()
         {
             int score = 0;
@@ -725,7 +729,184 @@ namespace MineSweeper
             Console.WriteLine("Tak for at spille Simons sindsyge Jeopardy!");
             Console.ReadKey();
         }
+
+        //Start on battleships
+        static void PlayBattleShips()
+        {
+            //Størrelsen på spillebrættet - det er 6 x 6
+            int boardSize = 6;
+
+            //Spilleren får en bane og Computeren får en bane
+            char[,] playerBoard = new char[boardSize, boardSize];
+            char[,] computerBoard = new char[boardSize, boardSize];
+
+            //Computerens skibslayout
+            bool[,] computerShips = new bool[boardSize, boardSize];
+
+            //Antallet af skibe der startes med
+            int playerShips = 4;
+            int computerShipsCount = 4;
+
+            //Laver en random der skal bruges til computerens placering af skibe og dens skud
+            Random random = new Random();
+
+            //Viser brættet som '~' i consolen
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    playerBoard[i, j] = '~';
+                    computerBoard[i, j] = '~';
+                }
+                Console.WriteLine();
+
+
+                //Placere spillerens skibe
+                playerBoard[3, 5] = 'S';
+                playerBoard[1, 2] = 'S';
+                playerBoard[4, 2] = 'S';
+                playerBoard[5, 3] = 'S';
+
+                //Computeren placere sine skibe tilfældigt
+                int placedShips = 0;
+                while (placedShips < computerShipsCount)
+                {
+                    int row = random.Next(boardSize);
+                    int col = random.Next(boardSize);
+
+                    //Tjek om der allerede er et skib på denne position
+                    if (!computerShips[row, col])
+                    {
+                        computerShips[row, col] = true;
+                        placedShips++;
+                    }
+                }
+
+                Console.WriteLine("Welcome to 'Battleship'" +
+                    "\n- you against the computer!");
+                Console.WriteLine();
+
+                //Hoved løkken
+                while (playerShips > 0 && computerShipsCount > 0)
+                {
+                    Console.Clear();
+
+                    //Udskriver begge spilleplader
+                    Console.WriteLine("\n--- Your board --- \t --- Opponents board ---");
+                    Console.WriteLine("\n  0 1 2 3 4 5 \t\t   0 1 2 3 4 5");
+                    for (int x = 0; x < boardSize; x++)
+                    {
+                        Console.Write($"{x} ");
+                        //Udskriver spillerens plade
+                        for (int y = 0; y < boardSize; y++)
+                        {
+                            PrintWithColor(playerBoard[x, y]);
+                        }
+
+
+                        Console.Write($"\t\t {x} ");
+                        //Console.Write($"{x} ");
+                        //Udskriv computerens plade
+                        for (int y = 0; y < boardSize; y++)
+                        {
+                            if (computerBoard[x, y] == 'X' || computerBoard[x, y] == 'O')
+                            {
+                                PrintWithColor(computerBoard[x, y]);
+                            }
+                            else
+                            {
+                                Console.Write("~ ");
+                            }
+                        }
+                        Console.WriteLine();
+                    }
+
+
+                    Console.WriteLine("\nYour turn! Shoot your opponents ships");
+                    Console.WriteLine("Enter a row and a coloum (0-5) seperated by a space");
+
+                    //læs og konverter spillerens input til rækker og kolonner
+                    string[] input = Console.ReadLine().Split(' ');
+                    int playerRow = int.Parse(input[0]);
+                    int playerCol = int.Parse(input[1]);
+
+                    //Tjek om spilleren rammer et skib
+                    if (computerShips[playerRow, playerCol])
+                    {
+                        Console.WriteLine("Nice! You hit one of their ships");
+                        computerBoard[playerRow, playerCol] = 'X';
+                        computerShips[playerRow, playerCol] = false; //Fjerner skibet fra computerens skibslayout
+                        computerShipsCount--;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Missed! There was no ship there");
+                        computerBoard[playerRow, playerCol] = 'O';
+                    }
+
+                    //Computeren skyder mod spillerens skibe
+                    int compRow = random.Next(boardSize);
+                    int compCol = random.Next(boardSize);
+
+                    //Fortsæt med at vælge tilfældige koordinator, indtil computeren vælger et sted der ikke er skudt på endnu
+                    while (playerBoard[compRow, compCol] == 'X' || playerBoard[compRow, compCol] == 'O')
+                    {
+                        compRow = random.Next(boardSize);
+                        compCol = random.Next(boardSize);
+                    }
+
+                    //Vis computerens skud og resultat
+                    Console.WriteLine($"\nOpponent shoots at ({compRow}, {compCol})");
+
+                    if (playerBoard[compRow, compCol] == 'S')
+                    {
+                        Console.WriteLine("Oh no! Your opponent hit your ship!");
+                        playerBoard[compRow, compCol] = 'X';
+                        playerShips--;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Phew! Your opponent missed");
+                        playerBoard[compRow, compCol] = 'O';
+                    }
+
+                }
+
+                //Spillet er slut - hvem har vundet
+                if (playerShips == 0)
+                {
+                    Console.WriteLine("\nYou lost! Your opponent shot down all your ships");
+                }
+                else
+                {
+                    Console.WriteLine("\nCongratulations! You shot down all your opponents ships");
+                }
+                Console.ReadLine();
+            }
+        }
+
+        static void PrintWithColor(char symbol)
+        {
+            switch (symbol)
+            {
+                case 'X':
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case 'O':
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case 'S':
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                default:
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+            }
+            Console.Write(symbol + " ");
+            Console.ResetColor();
+        }
     }
 }
+
 
 

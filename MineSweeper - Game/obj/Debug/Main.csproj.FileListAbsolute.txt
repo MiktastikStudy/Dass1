@@ -1,0 +1,7 @@
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\bin\Debug\MineSweeper - Game.exe.config
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\bin\Debug\MineSweeper - Game.exe
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\bin\Debug\MineSweeper - Game.pdb
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\obj\Debug\Main.csproj.AssemblyReference.cache
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\obj\Debug\Main.csproj.CoreCompileInputs.cache
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\obj\Debug\MineSweeper - Game.exe
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper - Game\obj\Debug\MineSweeper - Game.pdb
