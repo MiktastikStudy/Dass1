@@ -1,0 +1,7 @@
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\bin\Debug\MineSweeper-Test.exe.config
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\bin\Debug\MineSweeper-Test.exe
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\bin\Debug\MineSweeper-Test.pdb
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\obj\Debug\MineSweeper-Test.csproj.AssemblyReference.cache
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\obj\Debug\MineSweeper-Test.csproj.CoreCompileInputs.cache
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\obj\Debug\MineSweeper-Test.exe
+C:\Users\david\OneDrive\Desktop\School\HAGI\Dass1\MineSweeper-Test\obj\Debug\MineSweeper-Test.pdb
