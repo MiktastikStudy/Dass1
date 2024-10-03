@@ -27,35 +27,38 @@ namespace MineSweeper
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Choose one of 4 games;" +
-                "\n 1. Minesweeper" +
-                "\n 2. Chess" +
-                "\n 3. Battleships" +
-                "\n 4. Jeoperdy" +
-                "\n 5. Exit");
-            Console.WriteLine("Write the number of your choice");
-            gameChoice = Console.ReadLine();
-
-            switch (gameChoice)
+            while (true)
             {
-                case "1":
-                    PlayMineSweeper();
-                    break;
-                case "2":
-                    //PlayChess();
-                    break;
-                case "3":
-                    //PlayBattleShips();
-                    break;
-                case "4":
-                    //PlayJeoperdy();
-                    break;
-                case "5":
-                    //Exit();
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    break;
+                Console.Clear();
+                Console.WriteLine("Choose one of 4 games;" +
+               "\n 1. Minesweeper" +
+               "\n 2. Chess" +
+               "\n 3. Battleships" +
+               "\n 4. Jeoperdy" +
+               "\n 5. Exit");
+                Console.WriteLine("Write the number of your choice");
+                gameChoice = Console.ReadLine();
+
+                switch (gameChoice)
+                {
+                    case "1":
+                        PlayMineSweeper();
+                        break;
+                    case "2":
+                        //PlayChess();
+                        break;
+                    case "3":
+                        //PlayBattleShips();
+                        break;
+                    case "4":
+                        //PlayJeoperdy();
+                        break;
+                    case "5":
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
             }
         }
 
@@ -90,7 +93,7 @@ namespace MineSweeper
                 // Prompt to try again or quit
                 if (!TryAgain())
                 {
-                    break; // Quit if player chooses not to try again
+                    return; // Quit if player chooses not to try again
                 }
             }
         }
