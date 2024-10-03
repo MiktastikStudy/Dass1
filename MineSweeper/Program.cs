@@ -4,28 +4,62 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MineSweeper
 {
-    /*
-     * Insert win condition
-     */
     internal class Program
     {
         static int height = 8;
         static int width = 8;
         static char[,] board = new char[height, width];      // Store the current view of the board
         static bool[,] isRevealed = new bool[height, width]; // Track revealed cells
-        static int numMines = 1;                            // Number of mines
+        static int numMines = 8;                            // Number of mines
         static bool[,] isMine = new bool[height, width];     // Track mine positions
         static int[,] adjacentMines = new int[height, width];// Store number of mines around each cell
         static bool[,] isFlagged = new bool[height, width];  // Track flagged cells
         static bool gameOver = false;                        // Game over
         static int flagsLeft;                                // Tracks how many flags are left
+        static string gameChoice;
 
         static void Main(string[] args)
+        {
+            Console.WriteLine("Choose one of 4 games;" +
+                "\n 1. Minesweeper" +
+                "\n 2. Chess" +
+                "\n 3. Battleships" +
+                "\n 4. Jeoperdy" +
+                "\n 5. Exit");
+            Console.WriteLine("Write the number of your choice");
+            gameChoice = Console.ReadLine();
+
+            switch (gameChoice)
+            {
+                case "1":
+                    PlayMineSweeper();
+                    break;
+                case "2":
+                    //PlayChess();
+                    break;
+                case "3":
+                    //PlayBattleShips();
+                    break;
+                case "4":
+                    //PlayJeoperdy();
+                    break;
+                case "5":
+                    //Exit();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+
+        static void PlayMineSweeper()
         {
             while (true)
             {
