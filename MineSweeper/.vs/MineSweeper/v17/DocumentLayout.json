@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\david\\OneDrive\\Desktop\\School\\HAGI\\Dass1\\MineSweeper\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{02A88DA6-1459-438F-BED7-D9DCCC477B20}|..\\MineSweeper - Game\\MineSweeper - Game.csproj|c:\\users\\david\\onedrive\\desktop\\school\\hagi\\dass1\\minesweeper - game\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\david\\OneDrive\\Desktop\\School\\HAGI\\Dass1\\MineSweeper - Game\\Program.cs",
+              "RelativeDocumentMoniker": "..\\MineSweeper - Game\\Program.cs",
+              "ToolTip": "C:\\Users\\david\\OneDrive\\Desktop\\School\\HAGI\\Dass1\\MineSweeper - Game\\Program.cs",
+              "RelativeToolTip": "..\\MineSweeper - Game\\Program.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAwDMAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-03T08:34:11.887Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
