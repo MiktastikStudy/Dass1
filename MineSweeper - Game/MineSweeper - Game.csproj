@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E512A40F-7559-4B7F-B4BF-B18E8F277879}</ProjectGuid>
+    <ProjectGuid>{02A88DA6-1459-438F-BED7-D9DCCC477B20}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MineSweeper</RootNamespace>
-    <AssemblyName>MineSweeper</AssemblyName>
+    <RootNamespace>MineSweeper___Game</RootNamespace>
+    <AssemblyName>MineSweeper - Game</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\MineSweeper.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
