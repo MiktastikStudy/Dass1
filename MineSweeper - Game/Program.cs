@@ -51,7 +51,7 @@ namespace MineSweeper
                         //PlayBattleShips();
                         break;
                     case "4":
-                        //PlayJeoperdy();
+                        PlayJeoperdy();
                         break;
                     case "5":
                         return;
@@ -336,6 +336,7 @@ namespace MineSweeper
             {
                 gameOver = true;
             }
+            //Flood Fill:
             // If the revealed cell has no adjacent mines, reveal adjacent cells recursively
             else if (adjacentMines[row, col] == 0)
             {
@@ -555,6 +556,174 @@ namespace MineSweeper
                 Console.WriteLine(8 - row);
             }
             Console.WriteLine("  a b c d e f g h");
+        }
+
+        static void PlayJeoperdy()
+        {
+            int score = 0;
+            int gameActive = 1; // Om det er aktivt eller ej
+            int question1Answered = 0;
+            int question2Answered = 0;
+            int question3Answered = 0;
+            int question4Answered = 0;
+            int question5Answered = 0;
+            int question6Answered = 0;
+
+            Console.Clear();
+            Console.WriteLine("Velkommen til Simons sindsyge Jeopardy!");
+
+            while (gameActive == 1)
+            {
+                // Tjek om alt er besvaret
+                if (question1Answered == 1 && question2Answered == 1 && question3Answered == 1 && question4Answered == 1 && question5Answered == 1 && question6Answered == 1)
+                {
+                    Console.WriteLine("Du færdig!!! Din score blev: " + score);
+                    gameActive = 0;
+                    break;
+                }
+
+
+                Console.WriteLine("\nVælg en kategori:");
+                Console.WriteLine("1. Videnskab");
+                Console.WriteLine("2. Historie");
+                Console.WriteLine("3. Sport");
+
+                string categoryChoice = Console.ReadLine();
+
+
+                if (categoryChoice == "1")
+                {
+                    // Videnskabs spørgsmål
+                    if (question1Answered == 0)
+                    {
+                        Console.WriteLine("For 200 points: Hvilken gas består jordens atmosfære mest af?");
+                        string answer = Console.ReadLine();
+                        if (answer.Equals("Nitrogen", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Korrekt!");
+                            score += 200;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Forkert! Det korrekte svar var Nitrogen.");
+                            score -= 200;
+                        }
+                        question1Answered = 1;
+                    }
+                    else if (question2Answered == 0)
+                    {
+                        Console.WriteLine("For 100 points: Nu bliver det svært\nHvad er det kemiske symbol for Vand?");
+                        string answer = Console.ReadLine();
+                        if (answer.Equals("H2O", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Korrekt!");
+                            score += 100;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Forkert! The rigtige svar er H2O.");
+                            score -= 100;
+                        }
+                        question2Answered = 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Der ikke flere videnskabs spørgsmål.");
+                        Console.Clear();
+                    }
+                }
+                else if (categoryChoice == "2")
+                {
+                    // Historie spørgsmål
+                    if (question3Answered == 0)
+                    {
+                        Console.WriteLine("For 200 points:I hvilket år sluttede WW2?");
+                        string answer = Console.ReadLine();
+                        if (answer.Equals("1945", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("korrekt!");
+                            score += 200;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Forkert! Det korrekte svar var 1945. Kom igen ;)");
+                            score -= 200;
+                        }
+                        question3Answered = 1;
+                    }
+                    else if (question4Answered == 0)
+                    {
+                        Console.WriteLine("For 300 points: Hvor lang tid varede 100 års krigen?");
+                        string answer = Console.ReadLine();
+                        if (answer.Equals("116", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Korrekt!");
+                            score += 300;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Forkert! Det korrekte svar var 116 år.");
+                            score -= 300;
+                        }
+                        question4Answered = 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ikke flere spørgsmål i Historie.");
+                        Console.Clear();
+                    }
+                }
+                else if (categoryChoice == "3")
+                {
+                    // Sport spørgsmål
+                    if (question5Answered == 0)
+                    {
+                        Console.WriteLine("For 200 points: Hvilket land vandt FIFA World Cup i 2022?");
+                        string answer = Console.ReadLine();
+                        if (answer.Equals("Argentina", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Korrekt!");
+                            score += 200;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Forkert! Det korrekte svar var Argentina.");
+                            score -= 200;
+                        }
+                        question5Answered = 1;
+                    }
+                    else if (question6Answered == 0)
+                    {
+                        Console.WriteLine("For 100 points: Hvor mange spillere er der på et Pro fodboldhold?");
+                        string answer = Console.ReadLine();
+                        if (answer.Equals("11", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Korrekt!");
+                            score += 100;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Forkert! Det korrekte svar var 11.");
+                            score -= 100;
+                        }
+                        question6Answered = 1;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ikke flere i Sport.");
+                        Console.Clear();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Forkert. Vælg venligst 1, 2, eller 3.");
+                }
+
+                Console.WriteLine($"Din score er: {score}");
+            }
+
+            Console.WriteLine("Tak for at spille Simons sindsyge Jeopardy!");
+            Console.ReadKey();
         }
     }
 }
