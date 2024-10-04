@@ -25,6 +25,7 @@ namespace Main_
         static bool gameOver = false;                        // Game over
         static int flagsLeft;                                // Tracks how many flags are left
         static string gameChoice;
+        static char exitButton;
 
         static void Main(string[] args)
         {
@@ -77,6 +78,11 @@ namespace Main_
                     Console.Clear();
                     DisplayBoard();  // Display the current board state
                     PlayerInput();   // Handle player's input for revealing or flagging cells
+
+                    if (gameOver && exitButton == 'q')
+                    {
+                        return;
+                    }
                 }
                 // If the game is over, display the board one last time and end the game
                 Console.Clear();
@@ -255,7 +261,7 @@ namespace Main_
                 int colOutput;
 
                 // Prompt for player input (reveal or flag)
-                Console.WriteLine("Enter 'r' to reveal, or 'f' to flag");
+                Console.WriteLine("Enter 'r' to reveal,'f' to flag or 'q' to leave game");
                 input = Console.ReadLine().ToLower();
 
                 if (char.TryParse(input, out output))
@@ -310,14 +316,16 @@ namespace Main_
                             }
                         }
                     }
+                    else if (output == 'q')
+                    {
+                        gameOver = true;
+                        exitButton = 'q';
+                        return;
+                    }
                     else
                     {
                         Console.WriteLine("Invalid input, try again");
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input, try again");
                 }
             }
         }
