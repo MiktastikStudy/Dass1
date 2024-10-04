@@ -599,9 +599,16 @@ namespace Main_
                 Console.WriteLine("1. Videnskab");
                 Console.WriteLine("2. Historie");
                 Console.WriteLine("3. Sport");
+                Console.WriteLine("Eller skriv 'quit' for at afslutte.");
 
-                string categoryChoice = Console.ReadLine();
+                string categoryChoice = Console.ReadLine().ToLower(); ;
 
+                // Tjek for quit i kategori-valget
+                if (categoryChoice == "quit")
+                {
+                    Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                    return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                }
 
                 if (categoryChoice == "1")
                 {
@@ -610,6 +617,14 @@ namespace Main_
                     {
                         Console.WriteLine("For 200 points: Hvilken gas består jordens atmosfære mest af?");
                         string answer = Console.ReadLine();
+
+                        // Tjek for quit i svaret
+                        if (answer.Equals("quit", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                            return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                        }
+
                         if (answer.Equals("Nitrogen", StringComparison.OrdinalIgnoreCase))
                         {
                             Console.WriteLine("Korrekt!");
@@ -626,6 +641,14 @@ namespace Main_
                     {
                         Console.WriteLine("For 100 points: Nu bliver det svært\nHvad er det kemiske symbol for Vand?");
                         string answer = Console.ReadLine();
+
+                        // Tjek for quit i svaret
+                        if (answer.Equals("quit", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                            return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                        }
+
                         if (answer.Equals("H2O", StringComparison.OrdinalIgnoreCase))
                         {
                             Console.WriteLine("Korrekt!");
@@ -651,6 +674,14 @@ namespace Main_
                     {
                         Console.WriteLine("For 200 points:I hvilket år sluttede WW2?");
                         string answer = Console.ReadLine();
+
+                        // Tjek for quit i svaret
+                        if (answer.Equals("quit", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                            return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                        }
+
                         if (answer.Equals("1945", StringComparison.OrdinalIgnoreCase))
                         {
                             Console.WriteLine("korrekt!");
@@ -667,6 +698,14 @@ namespace Main_
                     {
                         Console.WriteLine("For 300 points: Hvor lang tid varede 100 års krigen?");
                         string answer = Console.ReadLine();
+
+                        // Tjek for quit i svaret
+                        if (answer.Equals("quit", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                            return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                        }
+
                         if (answer.Equals("116", StringComparison.OrdinalIgnoreCase))
                         {
                             Console.WriteLine("Korrekt!");
@@ -692,6 +731,14 @@ namespace Main_
                     {
                         Console.WriteLine("For 200 points: Hvilket land vandt FIFA World Cup i 2022?");
                         string answer = Console.ReadLine();
+
+                        // Tjek for quit i svaret
+                        if (answer.Equals("quit", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                            return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                        }
+
                         if (answer.Equals("Argentina", StringComparison.OrdinalIgnoreCase))
                         {
                             Console.WriteLine("Korrekt!");
@@ -708,6 +755,14 @@ namespace Main_
                     {
                         Console.WriteLine("For 100 points: Hvor mange spillere er der på et Pro fodboldhold?");
                         string answer = Console.ReadLine();
+
+                        // Tjek for quit i svaret
+                        if (answer.Equals("quit", StringComparison.OrdinalIgnoreCase))
+                        {
+                            Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                            return; // Afslut Jeopardy og gå tilbage til hovedmenuen
+                        }
+
                         if (answer.Equals("11", StringComparison.OrdinalIgnoreCase))
                         {
                             Console.WriteLine("Korrekt!");
@@ -832,9 +887,18 @@ namespace Main_
 
                     Console.WriteLine("\nYour turn! Shoot your opponents ships");
                     Console.WriteLine("Enter a row and a coloum (0-5) seperated by a space");
+                    Console.WriteLine("Or write quit to return to main menu");
+
+                    // Læs og tjek om spilleren vil afslutte
+                    string playerInput = Console.ReadLine();
+                    if (playerInput.ToLower() == "quit")
+                    {
+                        Console.WriteLine("Afslutter spillet... Tak for at spille!");
+                        return; // Afslut spillet og gå tilbage til hovedmenuen
+                    }
 
                     //læs og konverter spillerens input til rækker og kolonner
-                    string[] input = Console.ReadLine().Split(' ');
+                    string[] input = playerInput.Split(' ');
                     int playerRow = int.Parse(input[0]);
                     int playerCol = int.Parse(input[1]);
 
